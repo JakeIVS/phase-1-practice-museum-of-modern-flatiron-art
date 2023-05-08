@@ -13,6 +13,15 @@ function initialize() {
             p.textContent = comment;
             commentField.appendChild(p);
         })
+        let commentBox = document.querySelector('#comment-form');
+        commentBox.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            let p = document.createElement('p');
+            p.textContent = commentBox.querySelector('[name="comment-input"]').value
+            debugger
+            commentField.appendChild(p);
+            commentBox.reset();
+        })
         let imageField = document.querySelector('#exhibit-image');
         imageField.src = exhibit.image;
     })
