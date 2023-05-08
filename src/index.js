@@ -17,9 +17,18 @@ function initialize() {
         commentBox.addEventListener('submit', (e)=>{
             e.preventDefault();
             let p = document.createElement('p');
-            p.textContent = commentBox.querySelector('[name="comment-input"]').value
-            debugger
+            newComment = commentBox.querySelector('[name="comment-input"]').value
+            p.textContent = newComment;
             commentField.appendChild(p);
+            newCommentsArray = [...exhibit.comments, newComment];
+            debugger
+            fetch (`http://localhost:3000/current-exhibits/${exhibit.id}`,{
+                method: 'PATCH',
+                headers:{
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({comments: newCommentsArray})
+            })
             commentBox.reset();
         })
         let imageField = document.querySelector('#exhibit-image');
